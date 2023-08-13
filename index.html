@@ -18,11 +18,21 @@
             gap: 1rem;
             place-items: center;
         }
+        .programmer{
+            background-color: #3b475d;
+        }
         main {
             width: 80%;
             background-color: #fff;
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0,0,0,0.2);
+        }
+        .programmer main{
+            background-color: #505c72;
+            color: #fff;
+        }
+        .programmer main h1{
+            color: #fff;
         }
         h1 {
             text-align: center;
@@ -37,7 +47,7 @@
         }
     </style>
 </head>
-<body>
+<body class="programmer">
     <main>
         <h1>Jokes</h1>
         <div id="joke"></div>
@@ -59,11 +69,16 @@
     fetch('https://v2.jokeapi.dev/joke/Programming,Dark?blacklistFlags=nsfw,political').then( async (data) => {
         let data1;
         data1 = await data.json();
+        if(data1.category === "Programming")
+            document.body.classList.add("programmer");
+        else
+            document.body.classList.remove("programmer");
+
         if(data1.type === "single")
             joke.innerHTML = data1.joke;
         else
-            joke.innerHTML = data1.setup + `\n` + data1.delivery;
-        console.log(data1);
+            joke.innerHTML = data1.setup + `<br><br>` + data1.delivery;
+        // console.log(data1);
     }).catch((err) => {
         console.log("There is some error which is : " + err);
     })
