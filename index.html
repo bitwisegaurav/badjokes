@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jokes</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: sans-serif;
+        }
+        body {
+            background-color: #f4f4f4;
+            height: 100vh;
+            display: grid;
+            gap: 1rem;
+            place-items: center;
+        }
+        main {
+            width: 80%;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.2);
+        }
+        h1 {
+            text-align: center;
+            color: #3b475d;
+            padding: 20px;
+        }
+        #joke {
+            padding: 20px;
+            text-align: center;
+            /* border: 2px dotted black; */
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <h1>Jokes</h1>
+        <div id="joke"></div>
+    </main>
+</body>
+<script>
+    const joke = document.querySelector('#joke');
+    // const getJoke = async () => {
+    //     const jokeRes = await fetch('https://icanhazdadjoke.com/', {
+    //         headers: {
+    //             'Accept': 'application/json'
+    //         }
+    //     });
+    //     const jokeData = await jokeRes.json();
+    //     console.log(jokeData);
+    //     joke.innerHTML = jokeData.joke;
+    // }
+    // getJoke();
+    fetch('https://v2.jokeapi.dev/joke/Programming,Dark?blacklistFlags=nsfw,political').then( async (data) => {
+        let data1;
+        data1 = await data.json();
+        if(data1.type === "single")
+            joke.innerHTML = data1.joke;
+        else
+            joke.innerHTML = data1.setup + `\n` + data1.delivery;
+        console.log(data1);
+    }).catch((err) => {
+        console.log("There is some error which is : " + err);
+    })
+</script>
+</html>
