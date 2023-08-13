@@ -69,7 +69,7 @@
     fetch('https://v2.jokeapi.dev/joke/Programming,Dark?blacklistFlags=nsfw,political').then( async (data) => {
         let data1;
         data1 = await data.json();
-        if(data1.category === "dark")
+        if(data1.category === "Dark")
             document.body.classList.add("programmer");
         else
             document.body.classList.remove("programmer");
